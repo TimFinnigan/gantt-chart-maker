@@ -1,4 +1,18 @@
-.highcharts-container  {
-    width: 90%;
-    border: 1px solid lightgrey;
+#wrapper {
+  margin-top: 35px;
+}
+
+#user-form,
+#gantt-container {
+  display: inline-block;
+}
+
+#user-form {
+  vertical-align: top;
+  margin-top: 70px;
+  margin-left: 50px;
+}
+
+#gantt-container {
+  margin-top: 45px;
 }

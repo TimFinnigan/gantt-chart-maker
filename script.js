@@ -5,7 +5,7 @@ $(document).ready(function() {
       width: 1000
     },
     title: {
-      text: "Left Axis as Table"
+      text: ""
     },
 
     xAxis: {

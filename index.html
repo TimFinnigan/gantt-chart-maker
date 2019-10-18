@@ -11,11 +11,36 @@
     <script src="script.js"></script>
     <script src="style.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
-    <div>
-        <span id="gantt-chart"></span>
+    <div id="wrapper">
+        <form id="user-form">
+            <h5>Add a task</h5>
+            <div class="form-group">
+                <label for="project">Project</label>
+                <input type="email" class="form-control" id="project" aria-describedby="emailHelp"
+                    placeholder="Enter project">
+            </div>
+            <div class="form-group">
+                <label for="assignee">Assignee</label>
+                <input type="password" class="form-control" id="assignee" placeholder="Enter assignee">
+            </div>
+            <div class="form-group">
+                <label for="startDate">Start Date</label>
+                <input type="password" class="form-control" id="startDate" placeholder="Enter date">
+            </div>
+            <div class="form-group">
+                <label for="endDate">End Date</label>
+                <input type="password" class="form-control" id="endDate" placeholder="Enter date">
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+        <div id="gantt-container">
+            <span id="gantt-chart"></span>
+        </div>
     </div>
 </body>
 
