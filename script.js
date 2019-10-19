@@ -116,8 +116,5 @@ $(document).ready(function() {
       }
     ],
 
-    exporting: {
-      sourceWidth: 1000
-    }
   });
 });
