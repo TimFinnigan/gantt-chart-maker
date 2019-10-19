@@ -3,17 +3,46 @@
     - ability to add a title (also to show in tooltip as series name)
     - ability to check/uncheck assignee
     - ability to choose between a daily schedule or weekly/monthly
+    - ability to remove task
 */
 
 $(document).ready(function() {
   const validateForm = function() {
+    event.preventDefault();
     let formInvalid = false;
     $("#user-form input").each(function() {
       if ($(this).val() === "") {
         formInvalid = true;
       }
     });
+
     if (formInvalid) alert("Please fill in all fields");
+
+    let formData = {
+      data: []
+    };
+
+    formData.data.push(
+      {
+        start: Date.UTC(2017, 10, 18, 8),
+        end: Date.UTC(2017, 10, 25, 16),
+        name: "Start prototype",
+        assignee: "Richards",
+        y: 0
+      },
+      {
+        start: Date.UTC(2017, 10, 18, 8),
+        end: Date.UTC(2017, 10, 18, 8),
+        name: "Add task...",
+        assignee: "",
+        y: 1
+      },
+     
+    );
+
+    console.log(formData);
+
+    loadGanttChart(formData);
   };
 
   $("#add-task").click(function() {
