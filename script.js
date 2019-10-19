@@ -7,6 +7,18 @@
 */
 
 $(document).ready(function() {
+  let formData = {
+    data: []
+  };
+
+  let tasks = 0;
+
+  // Convert date to UTC
+  const convertDate = function(dateString) {
+    let dateArray = dateString.split("/");
+    return Date.UTC(dateArray[2], dateArray[0] - 1, dateArray[1], 8);
+  };
+
   const validateForm = function() {
     event.preventDefault();
     let formInvalid = false;
@@ -16,31 +28,37 @@ $(document).ready(function() {
       }
     });
 
-    if (formInvalid) alert("Please fill in all fields");
+    if (formInvalid) {
+      alert("Please fill in all fields");
+      return;
+    }
 
-    let formData = {
-      data: []
-    };
+    if (tasks === 1) {
+      formData.data.pop();
+    }
 
-    formData.data.push(
-      {
-        start: Date.UTC(2017, 10, 18, 8),
-        end: Date.UTC(2017, 10, 25, 16),
-        name: "Start prototype",
-        assignee: "Richards",
-        y: 0
-      },
-      {
-        start: Date.UTC(2017, 10, 18, 8),
-        end: Date.UTC(2017, 10, 18, 8),
-        name: "Add task...",
-        assignee: "",
-        y: 1
-      },
-     
-    );
+    let taskObject = {};
 
-    console.log(formData);
+    taskObject.name = $("#project").val();
+    taskObject.assignee = $("#assignee").val();
+    taskObject.start = convertDate($("#startDate").val());
+    taskObject.end = convertDate($("#endDate").val());
+    taskObject.y = tasks;
+
+    let addTask = {};
+    addTask.name = "Add task...";
+    addTask.assignee = "-";
+    addTask.start = convertDate($("#startDate").val());
+    addTask.end = convertDate($("#startDate").val());
+    addTask.y = 1;
+
+    formData.data.push(taskObject);
+
+    if (tasks === 0) {
+      formData.data.push(addTask);
+    }
+
+    tasks++;
 
     loadGanttChart(formData);
   };
