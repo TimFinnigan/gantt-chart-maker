@@ -13,7 +13,7 @@ Gantt charts are used for project management, but are also useful for personal s
 
 ## Dependencies
 
-jQuery v1.8.2
-jQuery UI v1.12.0
-Bootstrap v4.3.1
-Highcharts Gantt JS v2.7.0
+* jQuery v1.8.2
+* jQuery UI v1.12.0
+* Bootstrap v4.3.1
+* Highcharts Gantt JS v2.7.0
