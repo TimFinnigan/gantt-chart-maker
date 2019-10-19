@@ -1,4 +1,18 @@
 $(document).ready(function() {
+  const validateForm = function() {
+    let formInvalid = false;
+    $("#user-form input").each(function() {
+      if ($(this).val() === "") {
+        formInvalid = true;
+      }
+    });
+    if (formInvalid) alert("Please fill in all fields");
+  };
+
+  $("#add-task").click(function() {
+    validateForm();
+  });
+
   Highcharts.ganttChart("gantt-chart", {
     credits: { enabled: false },
     chart: {
@@ -114,7 +128,6 @@ $(document).ready(function() {
           }
         ]
       }
-    ],
-
+    ]
   });
 });

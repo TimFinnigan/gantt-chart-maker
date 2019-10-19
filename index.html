@@ -22,22 +22,22 @@
             <h5>Add a task</h5>
             <div class="form-group">
                 <label for="project">Project</label>
-                <input type="email" class="form-control" id="project" aria-describedby="emailHelp"
+                <input type="text" class="form-control" id="project" aria-describedby="emailHelp"
                     placeholder="Enter project">
             </div>
             <div class="form-group">
                 <label for="assignee">Assignee</label>
-                <input type="password" class="form-control" id="assignee" placeholder="Enter assignee">
+                <input type="text" class="form-control" id="assignee" placeholder="Enter assignee">
             </div>
             <div class="form-group">
                 <label for="startDate">Start Date</label>
-                <input type="password" class="form-control" id="startDate" placeholder="Enter date">
+                <input type="text" class="form-control" id="startDate" placeholder="Enter date">
             </div>
             <div class="form-group">
                 <label for="endDate">End Date</label>
-                <input type="password" class="form-control" id="endDate" placeholder="Enter date">
+                <input type="text" class="form-control" id="endDate" placeholder="Enter date">
             </div>
-            <button type="submit" class="btn btn-primary">Add</button>
+            <button id="add-task" type="submit" class="btn btn-primary">Add</button>
         </form>
         <div id="gantt-container">
             <span id="gantt-chart"></span>
