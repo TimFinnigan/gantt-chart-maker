@@ -13,6 +13,11 @@ $(document).ready(function() {
     validateForm();
   });
 
+  $(function() {
+    $("#startDate").datepicker();
+    $("#endDate").datepicker();
+  });
+
   Highcharts.ganttChart("gantt-chart", {
     credits: { enabled: false },
     chart: {
