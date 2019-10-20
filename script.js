@@ -33,6 +33,14 @@ $(document).ready(function() {
       return;
     }
 
+    let startDate = convertDate($("#startDate").val());
+    let endDate = convertDate($("#endDate").val());
+
+    if (startDate > endDate) {
+      alert("Start date must come before enÎd date");
+      return;
+    }
+
     if (tasks === 1) {
       formData.data.pop();
     }
@@ -41,15 +49,15 @@ $(document).ready(function() {
 
     taskObject.name = $("#project").val();
     taskObject.assignee = $("#assignee").val();
-    taskObject.start = convertDate($("#startDate").val());
-    taskObject.end = convertDate($("#endDate").val());
+    taskObject.start = startDate;
+    taskObject.end = endDate;
     taskObject.y = tasks;
 
     let addTask = {};
     addTask.name = "Add task...";
     addTask.assignee = "-";
-    addTask.start = convertDate($("#startDate").val());
-    addTask.end = convertDate($("#startDate").val());
+    addTask.start = startDate;
+    addTask.end = endDate;
     addTask.y = 1;
 
     formData.data.push(taskObject);
