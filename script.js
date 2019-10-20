@@ -157,20 +157,20 @@ $(document).ready(function() {
             },
             {
               title: {
-                text: "Est. days"
+                text: "Days"
               },
               labels: {
                 formatter: function() {
                   var point = this.point,
                     days = 1000 * 60 * 60 * 24,
                     number = (point.x2 - point.x) / days;
-                  return Math.round(number * 100) / 100;
+                  return parseInt(number);
                 }
               }
             },
             {
               labels: {
-                format: "{point.start:%e. %b}"
+                format: "{point.start:%b. %e}"
               },
               title: {
                 text: "Start date"
@@ -182,7 +182,7 @@ $(document).ready(function() {
               },
               offset: 30,
               labels: {
-                format: "{point.end:%e. %b}"
+                format: "{point.end:%b. %e}"
               }
             }
           ]
@@ -190,7 +190,7 @@ $(document).ready(function() {
       },
 
       tooltip: {
-        xDateFormat: "%e %b %Y, %H:%M"
+        xDateFormat: "%b. %e"
       },
 
       series: [seriesData]
