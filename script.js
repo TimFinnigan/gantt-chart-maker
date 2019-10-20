@@ -76,36 +76,36 @@ $(document).ready(function() {
     name: "Project 1",
     data: [
       {
-        start: Date.UTC(2017, 10, 18, 8),
-        end: Date.UTC(2017, 10, 25, 16),
+        start: Date.UTC(2019, 10, 18, 0),
+        end: Date.UTC(2019, 10, 25, 0),
         name: "Start prototype",
         assignee: "Richards",
         y: 0
       },
       {
-        start: Date.UTC(2017, 10, 20, 8),
-        end: Date.UTC(2017, 10, 24, 16),
+        start: Date.UTC(2019, 10, 20, 0),
+        end: Date.UTC(2019, 10, 24, 0),
         name: "Develop",
         assignee: "Michaels",
         y: 1
       },
       {
-        start: Date.UTC(2017, 10, 25, 16),
-        end: Date.UTC(2017, 10, 25, 16),
+        start: Date.UTC(2019, 10, 25, 0),
+        end: Date.UTC(2019, 10, 26, 0),
         name: "Prototype done",
         assignee: "Richards",
         y: 2
       },
       {
-        start: Date.UTC(2017, 10, 27, 8),
-        end: Date.UTC(2017, 11, 3, 16),
+        start: Date.UTC(2019, 10, 27, 0),
+        end: Date.UTC(2019, 11, 3, 0),
         name: "Test prototype",
         assignee: "Richards",
         y: 3
       },
       {
-        start: Date.UTC(2017, 10, 23, 8),
-        end: Date.UTC(2017, 11, 15, 16),
+        start: Date.UTC(2019, 11, 1, 0),
+        end: Date.UTC(2019, 11, 15, 0),
         name: "Run acceptance tests",
         assignee: "Smith",
         y: 4
