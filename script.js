@@ -37,7 +37,7 @@ $(document).ready(function () {
     let endDate = convertDate($("#end_date").val());
 
     if (startDate > endDate) {
-      alert("Start date must come before enÎd date");
+      alert("Start date must come before end date");
       return;
     }
 
@@ -57,7 +57,7 @@ $(document).ready(function () {
     addTask.name = "Add task...";
     addTask.assignee = "-";
     addTask.start = startDate;
-    addTask.end = endDate;
+    addTask.end = startDate;
     addTask.y = 1;
 
     formData.data.push(taskObject);
@@ -125,7 +125,7 @@ $(document).ready(function () {
     Highcharts.ganttChart("gantt_container", {
       credits: { enabled: false },
       chart: {
-        width: 1000
+        width: 1100
       },
 
       title: {
