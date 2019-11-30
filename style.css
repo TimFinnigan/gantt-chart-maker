@@ -2,6 +2,14 @@
   margin-top: 35px;
 }
 
+#main_header {
+  margin-left: 45px;
+}
+
+#instructions {
+  margin-left: 50px;
+}
+
 #user-form,
 #gantt-container {
   display: inline-block;
