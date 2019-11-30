@@ -125,15 +125,16 @@ $(document).ready(function () {
     Highcharts.ganttChart("gantt_container", {
       credits: { enabled: false },
       chart: {
+        marginTop: 130,
         width: 1100
       },
 
       title: {
-        text: "Gantt Chart Demo"
+        // text: "Gantt Chart Demo"
       },
 
       subtitle: {
-        text: "Customize your own chart"
+        // text: "Customize your own chart"
       },
 
       xAxis: {
