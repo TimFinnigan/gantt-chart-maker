@@ -10,17 +10,17 @@
   margin-left: 50px;
 }
 
-#user-form,
-#gantt-container {
+#user_form,
+#gantt_container {
   display: inline-block;
 }
 
-#user-form {
+#user_form {
   vertical-align: top;
   margin-top: 70px;
   margin-left: 50px;
 }
 
-#gantt-container {
+#gantt_container {
   margin-top: 45px;
 }

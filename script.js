@@ -6,7 +6,7 @@
     - ability to remove task
 */
 
-$(document).ready(function() {
+$(document).ready(function () {
   let formData = {
     data: []
   };
@@ -14,15 +14,15 @@ $(document).ready(function() {
   let tasks = 0;
 
   // Convert date to UTC
-  const convertDate = function(dateString) {
+  const convertDate = function (dateString) {
     let dateArray = dateString.split("/");
     return Date.UTC(dateArray[2], dateArray[0] - 1, dateArray[1], 8);
   };
 
-  const validateForm = function() {
+  const validateForm = function () {
     event.preventDefault();
     let formInvalid = false;
-    $("#user-form input").each(function() {
+    $("#user_form input").each(function () {
       if ($(this).val() === "") {
         formInvalid = true;
       }
@@ -33,8 +33,8 @@ $(document).ready(function() {
       return;
     }
 
-    let startDate = convertDate($("#startDate").val());
-    let endDate = convertDate($("#endDate").val());
+    let startDate = convertDate($("#start_date").val());
+    let endDate = convertDate($("#end_date").val());
 
     if (startDate > endDate) {
       alert("Start date must come before enÎd date");
@@ -71,13 +71,13 @@ $(document).ready(function() {
     loadGanttChart(formData);
   };
 
-  $("#add-task").click(function() {
+  $("#add_task").click(function () {
     validateForm();
   });
 
-  $(function() {
-    $("#startDate").datepicker();
-    $("#endDate").datepicker();
+  $(function () {
+    $("#start_date").datepicker();
+    $("#end_date").datepicker();
   });
 
   let defaultData = {
@@ -121,8 +121,8 @@ $(document).ready(function() {
     ]
   };
 
-  const loadGanttChart = function(seriesData) {
-    Highcharts.ganttChart("gantt-chart", {
+  const loadGanttChart = function (seriesData) {
+    Highcharts.ganttChart("gantt_container", {
       credits: { enabled: false },
       chart: {
         width: 1000
@@ -168,7 +168,7 @@ $(document).ready(function() {
                 text: "Days"
               },
               labels: {
-                formatter: function() {
+                formatter: function () {
                   var point = this.point,
                     days = 1000 * 60 * 60 * 24,
                     number = (point.x2 - point.x) / days;
