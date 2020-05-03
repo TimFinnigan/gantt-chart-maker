@@ -17,10 +17,14 @@
 
 #user_form {
   vertical-align: top;
-  margin-top: 70px;
+  margin-top: 10px;
   margin-left: 50px;
 }
 
 #gantt_container {
   margin-top: 45px;
+}
+
+.form-group {
+  margin-top: 20px;
 }

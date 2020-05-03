@@ -35,7 +35,13 @@
         <span>To get started, simply add a task below.</span>
       </div>
       <form id="user_form">
-        <h5>Add a task</h5>
+        <button id="add_task" type="submit" class="btn btn-info">
+          Weekly
+        </button>
+        <button id="add_task" type="submit" class="btn btn-secondary">
+          Daily
+        </button>
+
         <div class="form-group">
           <label for="project">Project</label>
           <input
@@ -73,7 +79,7 @@
             placeholder="Enter date"
           />
         </div>
-        <button id="add_task" type="submit" class="btn btn-primary">Add</button>
+        <button id="add_task" type="submit" class="btn btn-info">Add</button>
       </form>
       <div id="gantt_container">
         <span id="gantt_chart"></span>
