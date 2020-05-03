@@ -1,210 +1,226 @@
-/*
-  To add:
-    - ability to add a title (also to show in tooltip as series name)
-    - ability to check/uncheck assignee
-    - ability to choose between a daily schedule or weekly/monthly
-    - ability to remove task
-*/
+var today = new Date(),
+  day = 1000 * 60 * 60 * 24,
+  each = Highcharts.each,
+  reduce = Highcharts.reduce,
+  btnShowDialog = document.getElementById("btnShowDialog"),
+  btnRemoveTask = document.getElementById("btnRemoveSelected"),
+  btnAddTask = document.getElementById("btnAddTask"),
+  btnCancelAddTask = document.getElementById("btnCancelAddTask"),
+  addTaskDialog = document.getElementById("addTaskDialog"),
+  inputName = document.getElementById("inputName"),
+  selectDepartment = document.getElementById("selectDepartment"),
+  selectDependency = document.getElementById("selectDependency"),
+  chkMilestone = document.getElementById("chkMilestone"),
+  isAddingTask = false;
 
-$(document).ready(function () {
-  let formData = {
-    data: []
-  };
+// Set to 00:00:00:000 today
+today.setUTCHours(0);
+today.setUTCMinutes(0);
+today.setUTCSeconds(0);
+today.setUTCMilliseconds(0);
+today = today.getTime();
 
-  let tasks = 0;
+// Update disabled status of the remove button, depending on whether or not we
+// have any selected points.
+function updateRemoveButtonStatus() {
+  var chart = this.series.chart;
+  // Run in a timeout to allow the select to update
+  setTimeout(function () {
+    btnRemoveTask.disabled = !chart.getSelectedPoints().length || isAddingTask;
+  }, 10);
+}
 
-  // Convert date to UTC
-  const convertDate = function (dateString) {
-    let dateArray = dateString.split("/");
-    return Date.UTC(dateArray[2], dateArray[0] - 1, dateArray[1], 8);
-  };
+// Create the chart
+var chart = Highcharts.ganttChart("container", {
+  exporting: {
+    enabled: true,
+  },
+  credits: {
+    enabled: false,
+  },
+  chart: {
+    spacingLeft: 1,
+  },
 
-  const validateForm = function () {
-    event.preventDefault();
-    let formInvalid = false;
-    $("#user_form input").each(function () {
-      if ($(this).val() === "") {
-        formInvalid = true;
-      }
-    });
+  title: {
+    text: "Interactive Gantt Chart",
+  },
 
-    if (formInvalid) {
-      alert("Please fill in all fields");
-      return;
-    }
+  subtitle: {
+    text: "Drag and drop points to edit",
+  },
 
-    let startDate = convertDate($("#start_date").val());
-    let endDate = convertDate($("#end_date").val());
-
-    if (startDate > endDate) {
-      alert("Start date must come before end date");
-      return;
-    }
-
-    if (tasks === 1) {
-      formData.data.pop();
-    }
-
-    let taskObject = {};
-
-    taskObject.name = $("#project").val();
-    taskObject.assignee = $("#assignee").val();
-    taskObject.start = startDate;
-    taskObject.end = endDate;
-    taskObject.y = tasks;
-
-    let addTask = {};
-    addTask.name = "Add task...";
-    addTask.assignee = "-";
-    addTask.start = startDate;
-    addTask.end = startDate;
-    addTask.y = 1;
-
-    formData.data.push(taskObject);
-
-    if (tasks === 0) {
-      formData.data.push(addTask);
-    }
-
-    tasks++;
-
-    loadGanttChart(formData);
-  };
-
-  $("#add_task").click(function () {
-    validateForm();
-  });
-
-  $(function () {
-    $("#start_date").datepicker();
-    $("#end_date").datepicker();
-  });
-
-  let defaultData = {
-    name: "Project 1",
-    data: [
-      {
-        start: Date.UTC(2019, 10, 18, 0),
-        end: Date.UTC(2019, 10, 25, 0),
-        name: "Start prototype",
-        assignee: "Richards",
-        y: 0
+  plotOptions: {
+    series: {
+      animation: false, // Do not animate dependency connectors
+      dragDrop: {
+        draggableX: true,
+        draggableY: true,
+        dragMinY: 0,
+        dragMaxY: 2,
+        dragPrecisionX: day / 3, // Snap to eight hours
       },
-      {
-        start: Date.UTC(2019, 10, 20, 0),
-        end: Date.UTC(2019, 10, 24, 0),
-        name: "Develop",
-        assignee: "Michaels",
-        y: 1
+      dataLabels: {
+        enabled: true,
+        format: "{point.name}",
+        style: {
+          cursor: "default",
+          pointerEvents: "none",
+        },
       },
-      {
-        start: Date.UTC(2019, 10, 25, 0),
-        end: Date.UTC(2019, 10, 26, 0),
-        name: "Prototype done",
-        assignee: "Richards",
-        y: 2
+      allowPointSelect: true,
+      point: {
+        events: {
+          select: updateRemoveButtonStatus,
+          unselect: updateRemoveButtonStatus,
+          remove: updateRemoveButtonStatus,
+        },
       },
-      {
-        start: Date.UTC(2019, 10, 27, 0),
-        end: Date.UTC(2019, 11, 3, 0),
-        name: "Test prototype",
-        assignee: "Richards",
-        y: 3
-      },
-      {
-        start: Date.UTC(2019, 11, 1, 0),
-        end: Date.UTC(2019, 11, 15, 0),
-        name: "Run acceptance tests",
-        assignee: "Smith",
-        y: 4
-      }
-    ]
-  };
+    },
+  },
 
-  const loadGanttChart = function (seriesData) {
-    Highcharts.ganttChart("gantt_container", {
-      credits: { enabled: false },
-      chart: {
-        marginTop: 130,
-        width: 1100
-      },
+  yAxis: {
+    type: "category",
+    categories: ["Tech", "Marketing", "Sales"],
+    min: 0,
+    max: 2,
+  },
 
-      title: {
-        // text: "Gantt Chart Demo"
-      },
+  xAxis: {
+    currentDateIndicator: true,
+  },
 
-      subtitle: {
-        // text: "Customize your own chart"
-      },
+  tooltip: {
+    xDateFormat: "%a %b %d, %H:%M",
+  },
 
-      xAxis: {
-        tickPixelInterval: 70
-      },
-
-      yAxis: {
-        type: "category",
-        grid: {
-          enabled: true,
-          borderColor: "rgba(0,0,0,0.3)",
-          borderWidth: 1,
-          columns: [
-            {
-              title: {
-                text: "Project"
-              },
-              labels: {
-                format: "{point.name}"
-              }
-            },
-            {
-              title: {
-                text: "Assignee"
-              },
-              labels: {
-                format: "{point.assignee}"
-              }
-            },
-            {
-              title: {
-                text: "Days"
-              },
-              labels: {
-                formatter: function () {
-                  var point = this.point,
-                    days = 1000 * 60 * 60 * 24,
-                    number = (point.x2 - point.x) / days;
-                  return parseInt(number);
-                }
-              }
-            },
-            {
-              labels: {
-                format: "{point.start:%b. %e}"
-              },
-              title: {
-                text: "Start date"
-              }
-            },
-            {
-              title: {
-                text: "End date"
-              },
-              offset: 30,
-              labels: {
-                format: "{point.end:%b. %e}"
-              }
-            }
-          ]
-        }
-      },
-
-      tooltip: {
-        xDateFormat: "%b. %e"
-      },
-
-      series: [seriesData]
-    });
-  };
-
-  loadGanttChart(defaultData);
+  series: [
+    {
+      name: "Project 1",
+      data: [
+        {
+          start: today + 2 * day,
+          end: today + day * 5,
+          name: "Prototype",
+          id: "prototype",
+          y: 0,
+        },
+        {
+          start: today + day * 6,
+          name: "Prototype done",
+          milestone: true,
+          dependency: "prototype",
+          id: "proto_done",
+          y: 0,
+        },
+        {
+          start: today + day * 7,
+          end: today + day * 11,
+          name: "Testing",
+          dependency: "proto_done",
+          y: 0,
+        },
+        {
+          start: today + day * 5,
+          end: today + day * 8,
+          name: "Product pages",
+          y: 1,
+        },
+        {
+          start: today + day * 9,
+          end: today + day * 10,
+          name: "Newsletter",
+          y: 1,
+        },
+        {
+          start: today + day * 9,
+          end: today + day * 11,
+          name: "Licensing",
+          id: "testing",
+          y: 2,
+        },
+        {
+          start: today + day * 11.5,
+          end: today + day * 12.5,
+          name: "Publish",
+          dependency: "testing",
+          y: 2,
+        },
+      ],
+    },
+  ],
 });
+
+/* Add button handlers for add/remove tasks */
+
+btnRemoveTask.onclick = function () {
+  var points = chart.getSelectedPoints();
+  each(points, function (point) {
+    point.remove();
+  });
+};
+
+btnShowDialog.onclick = function () {
+  // Update dependency list
+  var depInnerHTML = '<option value=""></option>';
+  each(chart.series[0].points, function (point) {
+    depInnerHTML +=
+      '<option value="' + point.id + '">' + point.name + " </option>";
+  });
+  selectDependency.innerHTML = depInnerHTML;
+
+  // Show dialog by removing "hidden" class
+  addTaskDialog.className = "overlay";
+  isAddingTask = true;
+
+  // Focus name field
+  inputName.value = "";
+  inputName.focus();
+};
+
+btnAddTask.onclick = function () {
+  // Get values from dialog
+  var series = chart.series[0],
+    name = inputName.value,
+    undef,
+    dependency = chart.get(
+      selectDependency.options[selectDependency.selectedIndex].value
+    ),
+    y = parseInt(
+      selectDepartment.options[selectDepartment.selectedIndex].value,
+      10
+    ),
+    maxEnd = reduce(
+      series.points,
+      function (acc, point) {
+        return point.y === y && point.end ? Math.max(acc, point.end) : acc;
+      },
+      0
+    ),
+    milestone = chkMilestone.checked || undef;
+
+  // Empty category
+  if (maxEnd === 0) {
+    maxEnd = today;
+  }
+
+  // Add the point
+  series.addPoint({
+    start: maxEnd + (milestone ? day : 0),
+    end: milestone ? undef : maxEnd + day,
+    y: y,
+    name: name,
+    dependency: dependency ? dependency.id : undef,
+    milestone: milestone,
+  });
+
+  // Hide dialog
+  addTaskDialog.className += " hidden";
+  isAddingTask = false;
+};
+
+btnCancelAddTask.onclick = function () {
+  // Hide dialog
+  addTaskDialog.className += " hidden";
+  isAddingTask = false;
+};
