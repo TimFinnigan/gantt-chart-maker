@@ -83,9 +83,9 @@ var chart = Highcharts.ganttChart("container", {
 
   yAxis: {
     type: "category",
-    categories: ["Planning", "Design", "Development", "Launch"],
+    categories: ["Planning", "Design", "Development", "Launch", ""],
     min: 0,
-    max: 3,
+    max: 4,
   },
 
   xAxis: {
