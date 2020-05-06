@@ -41,6 +41,7 @@ var chart = Highcharts.ganttChart("container", {
   chart: {
     styledMode: true,
     spacingLeft: 1,
+    marginTop: 100,
   },
 
   title: {
@@ -49,6 +50,7 @@ var chart = Highcharts.ganttChart("container", {
 
   subtitle: {
     text: "Drag and drop points to edit",
+    marginTop: 100,
   },
 
   plotOptions: {
