@@ -57,7 +57,7 @@ var chart = Highcharts.ganttChart("container", {
         draggableX: true,
         draggableY: true,
         dragMinY: 0,
-        dragMaxY: 2,
+        dragMaxY: 4,
         dragPrecisionX: day / 3, // Snap to eight hours
       },
       dataLabels: {
@@ -101,14 +101,14 @@ var chart = Highcharts.ganttChart("container", {
       name: "Project 1",
       data: [
         {
-          start: today + 1 * day,
-          end: today + day * 5,
+          start: today + 1,
+          end: today + day * 2,
           name: "Gather Requirements",
           id: "prototype",
           y: 0,
         },
         {
-          start: today + day * 7,
+          start: today + day * 3,
           name: "Mockup Complete",
           milestone: true,
           dependency: "prototype",
@@ -116,24 +116,24 @@ var chart = Highcharts.ganttChart("container", {
           y: 1,
         },
         {
-          start: today + day * 9,
-          end: today + day * 10,
+          start: today + day * 4,
+          end: today + day * 7,
           name: "Design Prototype",
           id: "design",
           dependency: "proto_done",
           y: 1,
         },
         {
-          start: today + day * 12,
-          end: today + day * 14,
+          start: today + day * 8,
+          end: today + day * 10,
           name: "Testing",
           id: "testing",
           dependency: "design",
           y: 2,
         },
         {
-          start: today + day * 16,
-          end: today + day * 18,
+          start: today + day * 10,
+          end: today + day * 12,
           name: "Publish App",
           dependency: "testing",
           y: 3,
