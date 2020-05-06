@@ -63,7 +63,9 @@ var chart = Highcharts.ganttChart("container", {
       dataLabels: {
         enabled: true,
         format: "{point.name}",
+        y: 18, // allow user to toggle label position
         style: {
+          color: "black",
           cursor: "default",
           pointerEvents: "none",
         },
