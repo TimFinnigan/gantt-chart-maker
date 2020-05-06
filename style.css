@@ -1,6 +1,9 @@
+@import "https://code.highcharts.com/css/highcharts.css";
+
 * {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
+
 #container,
 #buttonGroup {
   max-width: 1200px;
@@ -75,4 +78,15 @@
 
 #todo li {
   margin-top: 5px;
+}
+
+/* Hide weeks by default */
+svg > g:nth-child(21),
+svg > g:nth-child(12) > path:nth-child(5),
+svg > g:nth-child(12) > path {
+  display: none;
+}
+
+svg > g:nth-child(12) > .highcharts-axis-line {
+  display: block;
 }

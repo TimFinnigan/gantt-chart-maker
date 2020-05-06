@@ -39,6 +39,7 @@ var chart = Highcharts.ganttChart("container", {
     enabled: false,
   },
   chart: {
+    styledMode: true,
     spacingLeft: 1,
   },
 
