@@ -6,9 +6,18 @@
 
 #container,
 #buttonGroup {
-  max-width: 1200px;
-  min-width: 320px;
+  /* max-width: 1200px;
+  min-width: 320px; */
   margin: 1em auto;
+  margin: 5px 50px;
+}
+
+#container {
+  margin-top: 25px;
+}
+
+#button {
+  margin-bottom: 20px;
 }
 
 .hidden {
