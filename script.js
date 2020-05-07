@@ -32,119 +32,121 @@ $(document).ready(function () {
     }, 10);
   }
 
-  // Create the chart
-  var chart = Highcharts.ganttChart("container", {
-    exporting: {
-      enabled: true,
-    },
-    credits: {
-      enabled: false,
-    },
-    chart: {
-      styledMode: false,
-      spacingLeft: 1,
-    },
+  function loadGanttChart() {
+    // Create the chart
+    var chart = Highcharts.ganttChart("container", {
+      exporting: {
+        enabled: true,
+      },
+      credits: {
+        enabled: false,
+      },
+      chart: {
+        styledMode: false,
+        spacingLeft: 1,
+      },
 
-    title: {
-      text: "Interactive Gantt Chart",
-    },
+      title: {
+        text: "Interactive Gantt Chart",
+      },
 
-    subtitle: {
-      text: "Drag and drop points to edit",
-    },
+      subtitle: {
+        text: "Drag and drop points to edit",
+      },
 
-    plotOptions: {
-      series: {
-        animation: false, // Do not animate dependency connectors
-        dragDrop: {
-          draggableX: true,
-          draggableY: true,
-          dragMinY: 0,
-          dragMaxY: 4,
-          dragPrecisionX: day / 3, // Snap to eight hours
-        },
-        dataLabels: {
-          enabled: true,
-          format: "{point.name}",
-          // y: 18, // allow user to toggle label position
-          style: {
-            // color: "black",
-            cursor: "default",
-            pointerEvents: "none",
+      plotOptions: {
+        series: {
+          animation: false, // Do not animate dependency connectors
+          dragDrop: {
+            draggableX: true,
+            draggableY: true,
+            dragMinY: 0,
+            dragMaxY: 4,
+            dragPrecisionX: day / 3, // Snap to eight hours
           },
-        },
-        allowPointSelect: true,
-        point: {
-          events: {
-            select: updateRemoveButtonStatus,
-            unselect: updateRemoveButtonStatus,
-            remove: updateRemoveButtonStatus,
+          dataLabels: {
+            enabled: true,
+            format: "{point.name}",
+            // y: 18, // allow user to toggle label position
+            style: {
+              // color: "black",
+              cursor: "default",
+              pointerEvents: "none",
+            },
+          },
+          allowPointSelect: true,
+          point: {
+            events: {
+              select: updateRemoveButtonStatus,
+              unselect: updateRemoveButtonStatus,
+              remove: updateRemoveButtonStatus,
+            },
           },
         },
       },
-    },
 
-    yAxis: {
-      type: "category",
-      categories: ["Planning", "Design", "Development", "Launch"],
-      min: 0,
-      max: 3,
-    },
-
-    xAxis: {
-      currentDateIndicator: false,
-    },
-
-    tooltip: {
-      xDateFormat: "%a %b %d, %H:%M",
-    },
-
-    series: [
-      {
-        name: "Project 1",
-        data: [
-          {
-            start: today + 1,
-            end: today + day * 2,
-            name: "Gather Requirements",
-            id: "prototype",
-            y: 0,
-          },
-          {
-            start: today + day * 3,
-            name: "Mockup Complete",
-            milestone: true,
-            dependency: "prototype",
-            id: "proto_done",
-            y: 1,
-          },
-          {
-            start: today + day * 4,
-            end: today + day * 7,
-            name: "Design Prototype",
-            id: "design",
-            dependency: "proto_done",
-            y: 1,
-          },
-          {
-            start: today + day * 8,
-            end: today + day * 10,
-            name: "Testing",
-            id: "testing",
-            dependency: "design",
-            y: 2,
-          },
-          {
-            start: today + day * 10,
-            end: today + day * 12,
-            name: "Publish App",
-            dependency: "testing",
-            y: 3,
-          },
-        ],
+      yAxis: {
+        type: "category",
+        categories: ["Planning", "Design", "Development", "Launch"],
+        min: 0,
+        max: 3,
       },
-    ],
-  });
+
+      xAxis: {
+        currentDateIndicator: false,
+      },
+
+      tooltip: {
+        xDateFormat: "%a %b %d, %H:%M",
+      },
+
+      series: [
+        {
+          // name: "Project 1",
+          data: [
+            {
+              start: today + 1,
+              end: today + day * 2,
+              name: "Gather Requirements",
+              id: "prototype",
+              y: 0,
+            },
+            {
+              start: today + day * 3,
+              name: "Mockup Complete",
+              milestone: true,
+              dependency: "prototype",
+              id: "proto_done",
+              y: 1,
+            },
+            {
+              start: today + day * 4,
+              end: today + day * 7,
+              name: "Design Prototype",
+              id: "design",
+              dependency: "proto_done",
+              y: 1,
+            },
+            {
+              start: today + day * 8,
+              end: today + day * 10,
+              name: "Testing",
+              id: "testing",
+              dependency: "design",
+              y: 2,
+            },
+            {
+              start: today + day * 10,
+              end: today + day * 12,
+              name: "Publish App",
+              dependency: "testing",
+              y: 3,
+            },
+          ],
+        },
+      ],
+    });
+  }
 
   /* Add button handlers for add/remove tasks */
 
@@ -219,4 +221,6 @@ $(document).ready(function () {
     addTaskDialog.className += " hidden";
     isAddingTask = false;
   };
+
+  loadGanttChart();
 });
