@@ -41,7 +41,7 @@ $(document).ready(function () {
       enabled: false,
     },
     chart: {
-      styledMode: true,
+      styledMode: false,
       spacingLeft: 1,
     },
 
@@ -66,9 +66,9 @@ $(document).ready(function () {
         dataLabels: {
           enabled: true,
           format: "{point.name}",
-          y: 18, // allow user to toggle label position
+          // y: 18, // allow user to toggle label position
           style: {
-            color: "black",
+            // color: "black",
             cursor: "default",
             pointerEvents: "none",
           },
@@ -86,9 +86,9 @@ $(document).ready(function () {
 
     yAxis: {
       type: "category",
-      categories: ["Planning", "Design", "Development", "Launch", ""],
+      categories: ["Planning", "Design", "Development", "Launch"],
       min: 0,
-      max: 4,
+      max: 3,
     },
 
     xAxis: {
