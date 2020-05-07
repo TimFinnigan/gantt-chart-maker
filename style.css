@@ -79,3 +79,12 @@
 #todo li {
   margin-top: 5px;
 }
+
+#buttonGroup button {
+  background: white;
+  border: 1px solid lightgrey;
+}
+
+button:hover {
+  cursor: pointer;
+}
