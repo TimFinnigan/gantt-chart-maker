@@ -92,7 +92,7 @@ $(document).ready(function () {
     },
 
     xAxis: {
-      currentDateIndicator: true,
+      currentDateIndicator: false,
     },
 
     tooltip: {
