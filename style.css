@@ -7,6 +7,13 @@
 #main-title {
   font-weight: normal;
   margin-left: 50px;
+  margin-bottom: 10px;
+}
+
+#subtitle {
+  font-weight: normal;
+  margin-left: 50px;
+  margin-top: 0px;
 }
 
 #container,
