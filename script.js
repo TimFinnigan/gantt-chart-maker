@@ -4,6 +4,11 @@ $(document).ready(function () {
   let defaultTitle = "Interactive Gantt Chart";
   let defaultSubtitle = "Drag and drop points to edit";
 
+  $("#chart-title").attr("placeholder", defaultTitle);
+  $("#chart-subtitle").attr("placeholder", defaultSubtitle);
+
+  $("#chart-title").focus();
+
   function loadGanttChart(chartTitle, chartSubtitle, rows) {
     var today = new Date(),
       day = 1000 * 60 * 60 * 24,
