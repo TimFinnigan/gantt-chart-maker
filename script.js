@@ -232,6 +232,9 @@ $(document).ready(function () {
 
   let rows = ["Planning", "Design", "Development", "Launch"];
 
+  $("#chart-title").val(defaultTitle);
+  $("#chart-subtitle").val(defaultSubtitle);
+
   loadGanttChart(defaultTitle, defaultSubtitle, rows);
 
   $("#buttonGroup").append(
@@ -269,7 +272,7 @@ $(document).ready(function () {
     $("#update-rows-wrapper").show();
     $("#save-rows").click(function () {
       loadGanttChart($("#chart-title").val(), $("#chart-subtitle").val(), rows);
-      $("#update-title-wrapper").hide();
+      $("#update-rows-wrapper").hide();
     });
   });
 });
