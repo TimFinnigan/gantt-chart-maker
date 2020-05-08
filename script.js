@@ -220,6 +220,11 @@ $(document).ready(function () {
       addTaskDialog.className += " hidden";
       isAddingTask = false;
     };
+
+    $("#buttonGroup").prepend("<button id='edit-rows'>Edit rows</button>");
+    $("#buttonGroup").append(
+      "<button id='edit-task' disabled>Edit task</button>"
+    );
   }
 
   let rows = ["Planning", "Design", "Development", "Launch"];
