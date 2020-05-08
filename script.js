@@ -1,38 +1,38 @@
 $(document).ready(function () {
-  var today = new Date(),
-    day = 1000 * 60 * 60 * 24,
-    each = Highcharts.each,
-    reduce = Highcharts.reduce,
-    btnShowDialog = document.getElementById("btnShowDialog"),
-    btnRemoveTask = document.getElementById("btnRemoveSelected"),
-    btnAddTask = document.getElementById("btnAddTask"),
-    btnCancelAddTask = document.getElementById("btnCancelAddTask"),
-    addTaskDialog = document.getElementById("addTaskDialog"),
-    inputName = document.getElementById("inputName"),
-    selectDepartment = document.getElementById("selectDepartment"),
-    selectDependency = document.getElementById("selectDependency"),
-    chkMilestone = document.getElementById("chkMilestone"),
-    isAddingTask = false;
-
-  // Set to 00:00:00:000 today
-  today.setUTCHours(0);
-  today.setUTCMinutes(0);
-  today.setUTCSeconds(0);
-  today.setUTCMilliseconds(0);
-  today = today.getTime();
-
-  // Update disabled status of the remove button, depending on whether or not we
-  // have any selected points.
-  function updateRemoveButtonStatus() {
-    var chart = this.series.chart;
-    // Run in a timeout to allow the select to update
-    setTimeout(function () {
-      btnRemoveTask.disabled =
-        !chart.getSelectedPoints().length || isAddingTask;
-    }, 10);
-  }
-
   function loadGanttChart(rows) {
+    var today = new Date(),
+      day = 1000 * 60 * 60 * 24,
+      each = Highcharts.each,
+      reduce = Highcharts.reduce,
+      btnShowDialog = document.getElementById("btnShowDialog"),
+      btnRemoveTask = document.getElementById("btnRemoveSelected"),
+      btnAddTask = document.getElementById("btnAddTask"),
+      btnCancelAddTask = document.getElementById("btnCancelAddTask"),
+      addTaskDialog = document.getElementById("addTaskDialog"),
+      inputName = document.getElementById("inputName"),
+      selectDepartment = document.getElementById("selectDepartment"),
+      selectDependency = document.getElementById("selectDependency"),
+      chkMilestone = document.getElementById("chkMilestone"),
+      isAddingTask = false;
+
+    // Set to 00:00:00:000 today
+    today.setUTCHours(0);
+    today.setUTCMinutes(0);
+    today.setUTCSeconds(0);
+    today.setUTCMilliseconds(0);
+    today = today.getTime();
+
+    // Update disabled status of the remove button, depending on whether or not we
+    // have any selected points.
+    function updateRemoveButtonStatus() {
+      var chart = this.series.chart;
+      // Run in a timeout to allow the select to update
+      setTimeout(function () {
+        btnRemoveTask.disabled =
+          !chart.getSelectedPoints().length || isAddingTask;
+      }, 10);
+    }
+
     // Create the chart
     var chart = Highcharts.ganttChart("container", {
       exporting: {
@@ -146,81 +146,81 @@ $(document).ready(function () {
         },
       ],
     });
+
+    /* Add button handlers for add/remove tasks */
+
+    btnRemoveTask.onclick = function () {
+      var points = chart.getSelectedPoints();
+      each(points, function (point) {
+        point.remove();
+      });
+    };
+
+    btnShowDialog.onclick = function () {
+      // Update dependency list
+      var depInnerHTML = '<option value=""></option>';
+      each(chart.series[0].points, function (point) {
+        depInnerHTML +=
+          '<option value="' + point.id + '">' + point.name + " </option>";
+      });
+      selectDependency.innerHTML = depInnerHTML;
+
+      // Show dialog by removing "hidden" class
+      addTaskDialog.className = "overlay";
+      isAddingTask = true;
+
+      // Focus name field
+      inputName.value = "";
+      inputName.focus();
+    };
+
+    btnAddTask.onclick = function () {
+      // Get values from dialog
+      var series = chart.series[0],
+        name = inputName.value,
+        undef,
+        dependency = chart.get(
+          selectDependency.options[selectDependency.selectedIndex].value
+        ),
+        y = parseInt(
+          selectDepartment.options[selectDepartment.selectedIndex].value,
+          10
+        ),
+        maxEnd = reduce(
+          series.points,
+          function (acc, point) {
+            return point.y === y && point.end ? Math.max(acc, point.end) : acc;
+          },
+          0
+        ),
+        milestone = chkMilestone.checked || undef;
+
+      // Empty category
+      if (maxEnd === 0) {
+        maxEnd = today;
+      }
+
+      // Add the point
+      series.addPoint({
+        start: maxEnd + (milestone ? day : 0),
+        end: milestone ? undef : maxEnd + day,
+        y: y,
+        name: name,
+        dependency: dependency ? dependency.id : undef,
+        milestone: milestone,
+      });
+
+      // Hide dialog
+      addTaskDialog.className += " hidden";
+      isAddingTask = false;
+    };
+
+    btnCancelAddTask.onclick = function () {
+      // Hide dialog
+      addTaskDialog.className += " hidden";
+      isAddingTask = false;
+    };
   }
-
-  /* Add button handlers for add/remove tasks */
-
-  btnRemoveTask.onclick = function () {
-    var points = chart.getSelectedPoints();
-    each(points, function (point) {
-      point.remove();
-    });
-  };
-
-  btnShowDialog.onclick = function () {
-    // Update dependency list
-    var depInnerHTML = '<option value=""></option>';
-    each(chart.series[0].points, function (point) {
-      depInnerHTML +=
-        '<option value="' + point.id + '">' + point.name + " </option>";
-    });
-    selectDependency.innerHTML = depInnerHTML;
-
-    // Show dialog by removing "hidden" class
-    addTaskDialog.className = "overlay";
-    isAddingTask = true;
-
-    // Focus name field
-    inputName.value = "";
-    inputName.focus();
-  };
-
-  btnAddTask.onclick = function () {
-    // Get values from dialog
-    var series = chart.series[0],
-      name = inputName.value,
-      undef,
-      dependency = chart.get(
-        selectDependency.options[selectDependency.selectedIndex].value
-      ),
-      y = parseInt(
-        selectDepartment.options[selectDepartment.selectedIndex].value,
-        10
-      ),
-      maxEnd = reduce(
-        series.points,
-        function (acc, point) {
-          return point.y === y && point.end ? Math.max(acc, point.end) : acc;
-        },
-        0
-      ),
-      milestone = chkMilestone.checked || undef;
-
-    // Empty category
-    if (maxEnd === 0) {
-      maxEnd = today;
-    }
-
-    // Add the point
-    series.addPoint({
-      start: maxEnd + (milestone ? day : 0),
-      end: milestone ? undef : maxEnd + day,
-      y: y,
-      name: name,
-      dependency: dependency ? dependency.id : undef,
-      milestone: milestone,
-    });
-
-    // Hide dialog
-    addTaskDialog.className += " hidden";
-    isAddingTask = false;
-  };
-
-  btnCancelAddTask.onclick = function () {
-    // Hide dialog
-    addTaskDialog.className += " hidden";
-    isAddingTask = false;
-  };
 
   let rows = ["Planning", "Design", "Development", "Launch"];
 
