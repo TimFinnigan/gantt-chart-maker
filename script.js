@@ -32,7 +32,7 @@ $(document).ready(function () {
     }, 10);
   }
 
-  function loadGanttChart() {
+  function loadGanttChart(rows) {
     // Create the chart
     var chart = Highcharts.ganttChart("container", {
       exporting: {
@@ -87,9 +87,9 @@ $(document).ready(function () {
 
       yAxis: {
         type: "category",
-        categories: ["Planning", "Design", "Development", "Launch"],
+        categories: rows,
         min: 0,
-        max: 3,
+        max: rows.length - 1,
       },
 
       xAxis: {
@@ -222,5 +222,7 @@ $(document).ready(function () {
     isAddingTask = false;
   };
 
-  loadGanttChart();
+  let rows = ["Planning", "Design", "Development", "Launch"];
+
+  loadGanttChart(rows);
 });
