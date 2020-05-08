@@ -228,19 +228,17 @@ $(document).ready(function () {
       addTaskDialog.className += " hidden";
       isAddingTask = false;
     };
-
-    $("#buttonGroup").append(
-      "<button id='edit-task' disabled>Edit task</button>"
-    );
-    $("#buttonGroup").prepend("<button id='edit-rows'>Edit rows</button>");
-    $("#buttonGroup").prepend(
-      "<button id='update-title'>Update title</button>"
-    );
   }
 
   let rows = ["Planning", "Design", "Development", "Launch"];
 
   loadGanttChart(defaultTitle, defaultSubtitle, rows);
+
+  $("#buttonGroup").append(
+    "<button id='edit-task' disabled>Edit task</button>"
+  );
+  $("#buttonGroup").prepend("<button id='edit-rows'>Edit rows</button>");
+  $("#buttonGroup").prepend("<button id='update-title'>Update title</button>");
 
   $("#update-title").click(function () {
     $("#update-title-wrapper").show();
@@ -248,5 +246,6 @@ $(document).ready(function () {
     $("#save-title").click(function () {
       loadGanttChart($("#chart-title").val(), $("#chart-subtitle").val(), rows);
     });
+    $("#update-title-wrapper").show();
   });
 });
