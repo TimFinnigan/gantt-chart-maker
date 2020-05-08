@@ -104,7 +104,8 @@
 }
 
 #buttonGroup button,
-#save-title {
+#save-title,
+#save-rows {
   background: white;
   border: 1px solid lightgrey;
 }
@@ -126,7 +127,8 @@ footer a {
   margin-right: 5px !important;
 }
 
-#update-title-wrapper {
+#update-title-wrapper,
+#update-rows-wrapper {
   display: none;
   margin-top: 25px;
   margin-left: 50px;

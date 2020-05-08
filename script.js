@@ -248,4 +248,28 @@ $(document).ready(function () {
       $("#update-title-wrapper").hide();
     });
   });
+
+  $("#edit-rows").click(function () {
+    $("#update-rows-wrapper").show();
+    for (let i = 0; i < rows.length; i++) {
+      let rowHTML =
+        "<div class='form-group'>" +
+        "<input type='text' class='form-control' id='row-" +
+        i +
+        "' placeholder='" +
+        rows[i] +
+        "'/>";
+      ("</div>");
+
+      $("#update-rows-wrapper").append(rowHTML);
+    }
+
+    $("#update-rows-wrapper").append("<button id='save-rows'>Save</button>");
+
+    $("#update-rows-wrapper").show();
+    $("#save-rows").click(function () {
+      loadGanttChart($("#chart-title").val(), $("#chart-subtitle").val(), rows);
+      $("#update-title-wrapper").hide();
+    });
+  });
 });
