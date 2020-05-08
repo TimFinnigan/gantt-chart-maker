@@ -276,6 +276,7 @@ $(document).ready(function () {
 
     $("#update-rows-wrapper").show();
     $("#save-rows").click(function () {
+      // todo - save rows
       loadGanttChart($("#chart-title").val(), $("#chart-subtitle").val(), rows);
       $("#update-rows-wrapper").hide();
     });
