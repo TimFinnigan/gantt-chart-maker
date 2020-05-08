@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <title>Gantt Chart Maker</title>
     <link rel="stylesheet" href="./style.css" />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <!-- partial:index.partial.html -->
@@ -16,8 +22,8 @@
     <script src="https://code.highcharts.com/gantt/modules/draggable-points.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <div class="main-container">
-      <h1 id="main-title">Gantt Chart Maker</h1>
-      <h4 id="subtitle">To get started, edit the chart below</h4>
+      <h2 id="main-title">Gantt Chart Maker</h2>
+      <h5 id="subtitle">To get started, edit the chart below</h5>
       <div id="container"></div>
       <div id="buttonGroup" class="button-row">
         <button id="btnShowDialog">
@@ -64,10 +70,33 @@
           <div class="clear"></div>
         </div>
       </div>
+      <div id="update-title-wrapper">
+        <div class="form-group">
+          <label for="chart-title">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="chart-title"
+            placeholder="Enter chart-title"
+          />
+        </div>
+        <div class="form-group">
+          <label for="chart-subtitle">Subtitle</label>
+          <input
+            type="text"
+            class="form-control"
+            id="chart-subtitle"
+            placeholder="Enter chart-subtitle"
+          />
+        </div>
+        <button id="save-title">Save</button>
+      </div>
       <footer>
         Made by
         <a href="https://timfinnigan.com" target="_blank">Tim Finnigan</a>
       </footer>
+      <br />
+      <hr />
       <div id="todo">
         <h3>To do</h3>
         <ul>
