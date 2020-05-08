@@ -1,5 +1,10 @@
 $(document).ready(function () {
-  function loadGanttChart(rows) {
+  // (replace with local storage if exists...)
+  // todo - add reset all button??
+  let defaultTitle = "Interactive Gantt Chart";
+  let defaultSubtitle = "Drag and drop points to edit";
+
+  function loadGanttChart(chartTitle, chartSubtitle, rows) {
     var today = new Date(),
       day = 1000 * 60 * 60 * 24,
       each = Highcharts.each,
@@ -47,11 +52,11 @@ $(document).ready(function () {
       },
 
       title: {
-        text: "Interactive Gantt Chart",
+        text: chartTitle,
       },
 
       subtitle: {
-        text: "Drag and drop points to edit",
+        text: chartSubtitle,
       },
 
       plotOptions: {
@@ -232,5 +237,5 @@ $(document).ready(function () {
 
   let rows = ["Planning", "Design", "Development", "Launch"];
 
-  loadGanttChart(rows);
+  loadGanttChart(defaultTitle, defaultSubtitle, rows);
 });
