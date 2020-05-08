@@ -270,6 +270,8 @@ $(document).ready(function () {
       $("#update-rows-wrapper").append(rowHTML);
     }
 
+    $("#row-0").focus();
+
     $("#update-rows-wrapper").append("<button id='save-rows'>Save</button>");
 
     $("#update-rows-wrapper").show();
