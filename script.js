@@ -245,7 +245,7 @@ $(document).ready(function () {
     $("#chart-title").focus();
     $("#save-title").click(function () {
       loadGanttChart($("#chart-title").val(), $("#chart-subtitle").val(), rows);
+      $("#update-title-wrapper").hide();
     });
-    $("#update-title-wrapper").show();
   });
 });
