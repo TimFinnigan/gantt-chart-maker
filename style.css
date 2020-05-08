@@ -114,3 +114,7 @@ footer {
   margin-top: 50px;
   margin-left: 50px;
 }
+
+#update-title {
+  margin-right: 5px !important;
+}

@@ -221,9 +221,12 @@ $(document).ready(function () {
       isAddingTask = false;
     };
 
-    $("#buttonGroup").prepend("<button id='edit-rows'>Edit rows</button>");
     $("#buttonGroup").append(
       "<button id='edit-task' disabled>Edit task</button>"
+    );
+    $("#buttonGroup").prepend("<button id='edit-rows'>Edit rows</button>");
+    $("#buttonGroup").prepend(
+      "<button id='update-title'>Update title</button>"
     );
   }
 
