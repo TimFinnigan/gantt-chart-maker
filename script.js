@@ -244,6 +244,7 @@ $(document).ready(function () {
   $("#buttonGroup").prepend("<button id='update-title'>Update title</button>");
 
   $("#update-title").click(function () {
+    $("#update-rows-wrapper").hide();
     $("#update-title-wrapper").show();
     $("#chart-title").focus();
     $("#save-title").click(function () {
@@ -253,6 +254,8 @@ $(document).ready(function () {
   });
 
   $("#edit-rows").click(function () {
+    $("#update-title-wrapper").hide();
+    $("#update-rows-wrapper").empty();
     $("#update-rows-wrapper").show();
     for (let i = 0; i < rows.length; i++) {
       let rowHTML =
