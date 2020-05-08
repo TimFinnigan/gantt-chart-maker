@@ -262,7 +262,7 @@ $(document).ready(function () {
         "<div class='form-group'>" +
         "<input type='text' class='form-control' id='row-" +
         i +
-        "' placeholder='" +
+        "' value='" +
         rows[i] +
         "'/>";
       ("</div>");
