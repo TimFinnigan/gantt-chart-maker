@@ -7,8 +7,6 @@ $(document).ready(function () {
   $("#chart-title").attr("placeholder", defaultTitle);
   $("#chart-subtitle").attr("placeholder", defaultSubtitle);
 
-  $("#chart-title").focus();
-
   function loadGanttChart(chartTitle, chartSubtitle, rows) {
     var today = new Date(),
       day = 1000 * 60 * 60 * 24,
@@ -243,4 +241,12 @@ $(document).ready(function () {
   let rows = ["Planning", "Design", "Development", "Launch"];
 
   loadGanttChart(defaultTitle, defaultSubtitle, rows);
+
+  $("#update-title").click(function () {
+    $("#update-title-wrapper").show();
+    $("#chart-title").focus();
+    $("#save-title").click(function () {
+      loadGanttChart($("#chart-title").val(), $("#chart-subtitle").val(), rows);
+    });
+  });
 });
