@@ -235,7 +235,15 @@ $(document).ready(function () {
   $("#chart-title").val(defaultTitle);
   $("#chart-subtitle").val(defaultSubtitle);
 
-  loadGanttChart(defaultTitle, defaultSubtitle, rows);
+  if (localStorage.getItem("title") && localStorage.getItem("subtitle")) {
+    loadGanttChart(
+      localStorage.getItem("title"),
+      localStorage.getItem("subtitle"),
+      rows
+    );
+  } else {
+    loadGanttChart(defaultTitle, defaultSubtitle, rows);
+  }
 
   $("#buttonGroup").append(
     "<button id='edit-task' disabled>Edit task</button>"
@@ -248,6 +256,8 @@ $(document).ready(function () {
     $("#update-title-wrapper").show();
     $("#chart-title").focus();
     $("#save-title").click(function () {
+      localStorage.setItem("title", $("#chart-title").val());
+      localStorage.setItem("subtitle", $("#chart-subtitle").val());
       loadGanttChart($("#chart-title").val(), $("#chart-subtitle").val(), rows);
       $("#update-title-wrapper").hide();
     });
