@@ -276,8 +276,15 @@ $(document).ready(function () {
 
     $("#update-rows-wrapper").show();
     $("#save-rows").click(function () {
-      // todo - save rows
-      loadGanttChart($("#chart-title").val(), $("#chart-subtitle").val(), rows);
+      let newRows = [];
+      $("#update-rows-wrapper input").each(function () {
+        newRows.push(this.value);
+      });
+      loadGanttChart(
+        $("#chart-title").val(),
+        $("#chart-subtitle").val(),
+        newRows
+      );
       $("#update-rows-wrapper").hide();
     });
   });
