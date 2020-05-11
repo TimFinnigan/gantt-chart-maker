@@ -105,9 +105,14 @@
 
 #buttonGroup button,
 #save-title,
-#save-rows {
+#save-rows,
+#add-row {
   background: white;
   border: 1px solid lightgrey;
+}
+
+#save-rows {
+  margin-top: 15px;
 }
 
 button:hover {

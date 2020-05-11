@@ -272,9 +272,19 @@ $(document).ready(function () {
 
     $("#row-0").focus();
 
+    $("#update-rows-wrapper").append(
+      "<button id='add-row'>Add Row</button><br>"
+    );
+
     $("#update-rows-wrapper").append("<button id='save-rows'>Save</button>");
 
     $("#update-rows-wrapper").show();
+
+    $("#add-row").click(function () {
+      rows.push(" ");
+      $("#edit-rows").click();
+    });
+
     $("#save-rows").click(function () {
       let newRows = [];
       $("#update-rows-wrapper input").each(function () {
