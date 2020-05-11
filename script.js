@@ -230,7 +230,7 @@ $(document).ready(function () {
     };
   }
 
-  let rows = ["Planning", "Design", "Development", "Launch"];
+  let defaultRows = ["Planning", "Design", "Development", "Launch"];
 
   $("#chart-title").val(defaultTitle);
   $("#chart-subtitle").val(defaultSubtitle);
@@ -239,10 +239,10 @@ $(document).ready(function () {
     loadGanttChart(
       localStorage.getItem("title"),
       localStorage.getItem("subtitle"),
-      rows
+      defaultRows
     );
   } else {
-    loadGanttChart(defaultTitle, defaultSubtitle, rows);
+    loadGanttChart(defaultTitle, defaultSubtitle, defaultRows);
   }
 
   $("#buttonGroup").append(
@@ -258,7 +258,11 @@ $(document).ready(function () {
     $("#save-title").click(function () {
       localStorage.setItem("title", $("#chart-title").val());
       localStorage.setItem("subtitle", $("#chart-subtitle").val());
-      loadGanttChart($("#chart-title").val(), $("#chart-subtitle").val(), rows);
+      loadGanttChart(
+        $("#chart-title").val(),
+        $("#chart-subtitle").val(),
+        defaultRows
+      );
       $("#update-title-wrapper").hide();
     });
   });
@@ -267,13 +271,13 @@ $(document).ready(function () {
     $("#update-title-wrapper").hide();
     $("#update-rows-wrapper").empty();
     $("#update-rows-wrapper").show();
-    for (let i = 0; i < rows.length; i++) {
+    for (let i = 0; i < defaultRows.length; i++) {
       let rowHTML =
         "<div class='form-group'>" +
         "<input type='text' class='form-control' id='row-" +
         i +
         "' value='" +
-        rows[i] +
+        defaultRows[i] +
         "'/>";
       ("</div>");
 
@@ -291,7 +295,7 @@ $(document).ready(function () {
     $("#update-rows-wrapper").show();
 
     $("#add-row").click(function () {
-      rows.push(" ");
+      defaultRows.push(" ");
       $("#edit-rows").click();
     });
 
