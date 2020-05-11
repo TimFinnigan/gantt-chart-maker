@@ -11,7 +11,14 @@ $(document).ready(function () {
     defaultSubtitle = localStorage.getItem("subtitle");
   if (localStorage.getItem("rows"))
     defaultRows = JSON.parse(localStorage.getItem("rows"));
-  console.log(typeof defaultRows);
+
+  $("#reset-chart").click(function () {
+    localStorage.clear();
+    defaultTitle = "Interactive Gantt Chart";
+    defaultSubtitle = "Drag and drop points to edit";
+    defaultRows = ["Planning", "Design", "Development", "Launch"];
+    loadGanttChart(defaultTitle, defaultSubtitle, defaultRows);
+  });
 
   $("#chart-title").attr("placeholder", defaultTitle);
   $("#chart-subtitle").attr("placeholder", defaultSubtitle);

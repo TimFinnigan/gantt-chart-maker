@@ -139,3 +139,14 @@ footer a {
   margin-left: 50px;
   width: 300px;
 }
+
+#reset-chart {
+  margin-left: 50px;
+  margin-top: 35px;
+  color: steelblue;
+  text-decoration: underline;
+}
+
+#reset-chart:hover {
+  cursor: pointer;
+}
