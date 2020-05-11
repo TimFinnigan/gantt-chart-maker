@@ -14,9 +14,6 @@ $(document).ready(function () {
 
   $("#reset-chart").click(function () {
     localStorage.clear();
-    defaultTitle = "Interactive Gantt Chart";
-    defaultSubtitle = "Drag and drop points to edit";
-    defaultRows = ["Planning", "Design", "Development", "Launch"];
     loadGanttChart(defaultTitle, defaultSubtitle, defaultRows);
   });
 
