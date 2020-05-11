@@ -3,6 +3,15 @@ $(document).ready(function () {
   // todo - add reset all button??
   let defaultTitle = "Interactive Gantt Chart";
   let defaultSubtitle = "Drag and drop points to edit";
+  let defaultRows = ["Planning", "Design", "Development", "Launch"];
+
+  if (localStorage.getItem("title"))
+    defaultTitle = localStorage.getItem("title");
+  if (localStorage.getItem("subtitle"))
+    defaultSubtitle = localStorage.getItem("subtitle");
+  if (localStorage.getItem("rows"))
+    defaultRows = JSON.parse(localStorage.getItem("rows"));
+  console.log(typeof defaultRows);
 
   $("#chart-title").attr("placeholder", defaultTitle);
   $("#chart-subtitle").attr("placeholder", defaultSubtitle);
@@ -230,20 +239,10 @@ $(document).ready(function () {
     };
   }
 
-  let defaultRows = ["Planning", "Design", "Development", "Launch"];
-
   $("#chart-title").val(defaultTitle);
   $("#chart-subtitle").val(defaultSubtitle);
 
-  if (localStorage.getItem("title") && localStorage.getItem("subtitle")) {
-    loadGanttChart(
-      localStorage.getItem("title"),
-      localStorage.getItem("subtitle"),
-      defaultRows
-    );
-  } else {
-    loadGanttChart(defaultTitle, defaultSubtitle, defaultRows);
-  }
+  loadGanttChart(defaultTitle, defaultSubtitle, defaultRows);
 
   $("#buttonGroup").append(
     "<button id='edit-task' disabled>Edit task</button>"
@@ -304,6 +303,7 @@ $(document).ready(function () {
       $("#update-rows-wrapper input").each(function () {
         newRows.push(this.value);
       });
+      localStorage.setItem("rows", JSON.stringify(newRows));
       loadGanttChart(
         $("#chart-title").val(),
         $("#chart-subtitle").val(),
