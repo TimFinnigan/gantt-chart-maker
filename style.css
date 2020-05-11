@@ -106,7 +106,9 @@
 #buttonGroup button,
 #save-title,
 #save-rows,
-#add-row {
+#add-row,
+#btnAddTask,
+#btnCancelAddTask {
   background: white;
   border: 1px solid lightgrey;
 }
